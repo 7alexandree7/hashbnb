@@ -1,0 +1,6 @@
+1 - REQBIN => Para fazer requisições http, a fins de testar a sua API, via web
+
+2- Middlware app.use(express.json()) => Sempre que fomos trabalhar com requisições http, no node precisamos desse Middlware para podermos receber as respostas em formato JSON
+
+3 - hashSync => Metodo para criptografia de senha, já de forma assincrona
+4 - genSaltSync => Quantidade de caracteres para fazer a criptografia da sua senha já de forma assincrona
