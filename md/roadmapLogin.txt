@@ -1,0 +1,14 @@
+BACK END
+
+1 - Criar um projeto no MongoDB Atlas (ou outro banco de dados)
+2 - Fazer a conexão com o banco de dados
+3 - Criar nosso models de Users
+4 - Criar nossa rota de Users
+
+
+FRONT END
+
+1 - Ter a tela de login
+2 - Fazer o formulario
+3 - Função de submit do formulario
+4 - Ter com o useState variaveis de estado para enviar para o back-end os dados do usuário preenchidos de forma dinámica
