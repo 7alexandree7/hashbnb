@@ -44,4 +44,29 @@ router.post("/", async (req, res) => {
 })
 
 
+router.post("/login", async (req, res) => {
+    connectDB()
+
+    const {email, password} = req.body
+
+    if(!email || !password) {
+        return res.status(400).json({message: "Please fill all fields"})
+    }
+
+    const userDoc = await User.findOne({email})
+
+    if(!userDoc) {
+        return res.status(404).json({message: "User not found"})
+    }
+
+    const passwordCorrect =  bcrypt.compareSync(password, userDoc.password)
+
+    if(!passwordCorrect) {
+        return res.status(401).json({message: "Invalid credentials"})
+    }
+
+    res.status(200).json({name: userDoc.name, email: userDoc.email, id: userDoc._id})
+})
+
+
 export default router;
