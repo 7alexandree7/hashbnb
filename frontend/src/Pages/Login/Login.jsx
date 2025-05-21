@@ -1,13 +1,34 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Link } from "react-router-dom";
+import '../../base/BASE_URL.JS';
 
 const Login = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (email && password)  {
+
+      try {
+        const axiosResponse = await axios.post('/users/login', {
+          email,
+          password
+        })
+        console.log(axiosResponse.data)
+        
+      } catch (error) {
+        alert(`Erro ao fazer login: ${error.response.data}`)
+      }
+    }
+
+    else {
+      alert('Preencha todos os campos!')
+    }
+
   }
 
   return (
