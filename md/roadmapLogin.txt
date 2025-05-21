@@ -4,7 +4,7 @@ BACK END
 2 - Fazer a conexão com o banco de dados
 3 - Criar nosso models de Users
 4 - Criar nossa rota de Users
-
+5 - Fazer a rota de login com seus mid / controlers
 
 FRONT END
 
@@ -12,3 +12,5 @@ FRONT END
 2 - Fazer o formulario
 3 - Função de submit do formulario
 4 - Ter com o useState variaveis de estado para enviar para o back-end os dados do usuário preenchidos de forma dinámica
+5 - Fazer uma requisição do tipo post, enviando os dados do usuario para o back-end
+
