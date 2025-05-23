@@ -4,7 +4,7 @@ import MenuIcon from "../Icons/MenuIcon/MenuIcon";
 import UserAvatarIcon from "../Icons/UserAvatarIcon/UserAvatarIcon";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <div className="shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
@@ -17,21 +17,24 @@ const Header = () => {
           <p className="text-2xl font-bold text-primary-400">ashbnb</p>
         </Link>
 
-        <div className=" hidden lg:flex items-center border border-gray-300 px-4 py-2 pl-6 rounded-full">
-          <p className="border-r border-r-gray-300 pr-4">Any where</p>
-          <p className="border-r border-r-gray-300 px-4">Any Week</p>
-          <p className="px-4">Guests</p>
-          <SearchIcon />
-        </div>
+      
+          <div className=" hidden lg:flex items-center border border-gray-300 px-4 py-2 pl-6 rounded-full">
+            <p className="border-r border-r-gray-300 pr-4">Any where</p>
+            <p className="border-r border-r-gray-300 px-4">Any Week</p>
+            <p className="px-4">Guests</p>
+            <SearchIcon />
+          </div>
+        
 
-        <div className="flex items-center border border-gray-300 px-4 py-2 pl-6 rounded-full gap-4">
+        <Link to={user? "/account" : "/login"} className="flex items-center border border-gray-300 px-4 py-2 pl-6 rounded-full gap-4">
           <div className="flex items-center gap-1">
             <UserAvatarIcon />
             <MenuIcon />
           </div>
-          <Link to="/login" className="sm:max-w-40 max-w-20 truncate">Alexandre Oliveira</Link>
-        </div>
-        
+          {user ? (
+            <Link to={user ? "/account" : "/login"} className="sm:max-w-40 max-w-20 truncate">{user}</Link>
+          ) : <></>}
+        </Link>
       </div>
     </div>
   );
