@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import '../../base/BASE_URL.JS';
 
-const Login = () => {
+const Login = ({user, setUser}) => {
+
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [redirect, setRedirect] = useState(false)
+
+  if (redirect || user) {
+    return <Navigate to="/" />
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,6 +24,8 @@ const Login = () => {
           email,
           password
         })
+        setUser(axiosResponse.data.name)
+        setRedirect(true)
         console.log(axiosResponse.data)
         
       } catch (error) {
@@ -28,7 +36,10 @@ const Login = () => {
     else {
       alert('Preencha todos os campos!')
     }
+  }
 
+  if (redirect) {
+    return <Navigate to="/" />
   }
 
   return (
