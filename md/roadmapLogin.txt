@@ -8,9 +8,10 @@ BACK END
 
 FRONT END
 
-1 - Ter a tela de login
+1 - Fazer a tela de login
 2 - Fazer o formulario
 3 - Função de submit do formulario
 4 - Ter com o useState variaveis de estado para enviar para o back-end os dados do usuário preenchidos de forma dinámica
 5 - Fazer uma requisição do tipo post, enviando os dados do usuario para o back-end
+6 - Fazer a Tela de Register
 
