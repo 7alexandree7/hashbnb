@@ -32,7 +32,7 @@ const Header = ({ user }) => {
             <MenuIcon />
           </div>
           {user ? (
-            <Link to={user ? "/account" : "/login"} className="sm:max-w-40 max-w-20 truncate">{user}</Link>
+            <p className="sm:max-w-40 max-w-20 truncate">{user}</p>
           ) : <></>}
         </Link>
       </div>

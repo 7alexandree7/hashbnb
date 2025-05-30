@@ -5,6 +5,8 @@ BACK END
 3 - Criar nosso models de Users
 4 - Criar nossa rota de Users
 5 - Fazer a rota de login com seus mid / controlers
+6 - Criar o token para o usuario, passando o jwt.sign(objUaser, JWT_SECRET_KEY_VALUE)
+7 - Adicionar na requisição o token via jwt nos cookies ao logar o usuario
 
 FRONT END
 

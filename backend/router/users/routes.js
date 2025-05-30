@@ -2,9 +2,12 @@ import express from 'express';
 import { connectDB } from "../../config/db.js";
 import User from "../../models/User.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import  'dotenv/config';
 
 const router = express.Router();
 const bcryptSalt = bcrypt.genSaltSync()
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 
 router.get("/", async (req, res) => {
     connectDB()
@@ -65,7 +68,15 @@ router.post("/login", async (req, res) => {
         return res.status(401).json({message: "Invalid credentials"})
     }
 
-    res.status(200).json({name: userDoc.name, email: userDoc.email, id: userDoc._id})
+    const newUserObj = {
+        name: userDoc.name,
+        email: userDoc.email,
+        id: userDoc._id,
+    }
+
+    const token = jwt.sign(newUserObj, JWT_SECRET_KEY)
+
+    res.cookie("token", token).status(200).json(newUserObj)
 })
 
 
