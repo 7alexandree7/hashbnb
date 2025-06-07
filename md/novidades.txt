@@ -4,3 +4,6 @@
 
 3 - hashSync => Metodo para criptografia de senha, já de forma assincrona
 4 - genSaltSync => Quantidade de caracteres para fazer a criptografia da sua senha já de forma assincrona
+
+5 - Utilizar cookies, como forma de salvar a sessão de um usuario dentro do sistema
+6- baixar a lib cookie-parser, para tranasformar os dados em JSON

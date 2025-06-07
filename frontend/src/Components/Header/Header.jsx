@@ -5,6 +5,7 @@ import UserAvatarIcon from "../Icons/UserAvatarIcon/UserAvatarIcon";
 import { Link } from "react-router-dom";
 
 const Header = ({ user }) => {
+  console.log(user)
   return (
     <div className="shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
@@ -32,7 +33,7 @@ const Header = ({ user }) => {
             <MenuIcon />
           </div>
           {user ? (
-            <p className="sm:max-w-40 max-w-20 truncate">{user}</p>
+            <p className="sm:max-w-40 max-w-20 truncate">{user.name}</p>
           ) : <></>}
         </Link>
       </div>

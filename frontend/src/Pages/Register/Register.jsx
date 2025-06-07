@@ -1,17 +1,34 @@
 import React, { useState } from 'react'
-//import axios from 'axios'
+import axios from 'axios'
 import { Link, Navigate } from "react-router-dom";
 import '../../base/BASE_URL.JS';
 
-const Register = () => {
+const Register = ({setUser}) => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    //const [redirect, setRedirect] = useState(false)
+    const [redirect, setRedirect] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if(name && email && password) {
+            try{
+                const {data: userDoc} = await axios.post("/users", {
+                    name,
+                    email,
+                    password
+                })
+                setUser(userDoc)
+                setRedirect(true)       
+            }
+            catch(error) {
+                console.log(error)
+            }
+        }
+    }
+    if (redirect) {
+        return <Navigate to="/" />
     }
 
     return (

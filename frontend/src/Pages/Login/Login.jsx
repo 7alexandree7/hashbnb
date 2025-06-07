@@ -20,13 +20,12 @@ const Login = ({user, setUser}) => {
     if (email && password)  {
 
       try {
-        const axiosResponse = await axios.post('/users/login', {
+        const {data: userDoc} = await axios.post('/users/login', {
           email,
           password
         })
-        setUser(axiosResponse.data.name)
+        setUser(userDoc)
         setRedirect(true)
-        console.log(axiosResponse.data)
         
       } catch (error) {
         alert(`Erro ao fazer login: ${error.response.data}`)
