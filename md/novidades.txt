@@ -7,3 +7,5 @@
 
 5 - Utilizar cookies, como forma de salvar a sessão de um usuario dentro do sistema
 6- baixar a lib cookie-parser, para tranasformar os dados em JSON
+
+7 <Route path="/account/:subpage?" element={<Account />} /> metodo de criar subpaginas dinamicas e opicionais com o Router Dom

@@ -26,13 +26,13 @@ router.get("/profile", async (req, res) => {
     const { token } = req.cookies
 
     if (token) {
-        try {
-            const userInfo = jwt.verify(token, JWT_SECRET_KEY)
+
+        jwt.verify(token, JWT_SECRET_KEY, {}, (error, userInfo) => {
+            if (error) {
+                throw error
+            }
             res.json(userInfo)
-        } catch (error) {
-            res.status(500).json({ message: "User not found" })
-            console.log("Error fetching users:", error);
-        }
+        })
     }
 
     else {
@@ -61,10 +61,15 @@ router.post("/", async (req, res) => {
             password: passwordHash,
         })
 
-        const newUserObj = {name, email, id: newUserDoc._id}
+        const newUserObj = { name, email, id: newUserDoc._id }
+
+        jwt.sign(newUserObj, JWT_SECRET_KEY, {}, (error, token) => {
+            if (error) {
+                throw error
+            }
+            res.cookie("token", token).status(200).json(newUserObj)
+        })
         
-        const token = jwt.sign(newUserObj, JWT_SECRET_KEY)
-        res.cookie("token", token).status(200).json(newUserObj)
 
     } catch (error) {
         console.log("Error creating user:", error);
@@ -100,7 +105,7 @@ router.post("/login", async (req, res) => {
         id: userDoc._id,
     }
 
-    const token = jwt.sign(newUserObj, JWT_SECRET_KEY)
+    const token = jwt.sign(newUserObj, JWT_SECRET_KEY, {}, () => { })
 
     res.cookie("token", token).status(200).json(newUserObj)
 })

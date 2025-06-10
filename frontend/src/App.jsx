@@ -6,6 +6,7 @@ import Login from './Pages/Login/Login'
 import Register from './Pages/Register/Register'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import axios from 'axios'
+import Account from './Pages/Account/Account'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login user={user} setUser={setUser} />} />
           <Route path='/register' element={<Register setUser={setUser} />} />
+          <Route path="/account/:subpage?" element={<Account />} />
         </Routes>
       </BrowserRouter>
     </>
