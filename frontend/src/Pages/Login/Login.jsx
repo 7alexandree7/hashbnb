@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, Navigate } from "react-router-dom";
 import '../../base/BASE_URL.JS';
+import { CustomHookUserContext } from '../../hooks/CustomHookUserContext';
 
-const Login = ({user, setUser}) => {
+const Login = () => {
 
-
+  const { user, setUser } = CustomHookUserContext()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [redirect, setRedirect] = useState(false)

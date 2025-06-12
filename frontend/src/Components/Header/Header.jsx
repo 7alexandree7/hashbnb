@@ -3,8 +3,12 @@ import SearchIcon from "../Icons/SearchIcon/SearchIcon";
 import MenuIcon from "../Icons/MenuIcon/MenuIcon";
 import UserAvatarIcon from "../Icons/UserAvatarIcon/UserAvatarIcon";
 import { Link } from "react-router-dom";
+import { CustomHookUserContext } from "../../hooks/CustomHookUserContext";
 
-const Header = ({ user }) => {
+const Header = () => {
+  
+  const { user } = CustomHookUserContext();
+
   return (
     <div className="shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
@@ -26,7 +30,7 @@ const Header = ({ user }) => {
           </div>
         
 
-        <Link to={user? "/account" : "/login"} className="flex items-center border border-gray-300 px-4 py-2 pl-6 rounded-full gap-4">
+        <Link to={user? "/account/profile" : "/login"} className="flex items-center border border-gray-300 px-4 py-2 pl-6 rounded-full gap-4">
           <div className="flex items-center gap-1">
             <UserAvatarIcon />
             <MenuIcon />

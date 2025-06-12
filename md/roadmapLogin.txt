@@ -7,6 +7,8 @@ BACK END
 5 - Fazer a rota de login com seus mid / controlers
 6 - Criar o token para o usuario, passando o jwt.sign(objUaser, JWT_SECRET_KEY_VALUE)
 7 - Adicionar na requisição o token via jwt nos cookies ao logar o usuario
+8 - Criar uma rota para fazer o verify do token / e retornar o usuario logado pelo cookie
+9 - endpoint para logout, limpar os cookies
 
 FRONT END
 
@@ -16,4 +18,5 @@ FRONT END
 4 - Ter com o useState variaveis de estado para enviar para o back-end os dados do usuário preenchidos de forma dinámica
 5 - Fazer uma requisição do tipo post, enviando os dados do usuario para o back-end
 6 - Fazer a Tela de Register
-
+7 -  Criar uma requisição para consumir o usuario selecionado pelo token via cookies
+8 - utilizar axios para fazr um post no /logout, setar o usuario como nulo e redirecionar o msm para a home

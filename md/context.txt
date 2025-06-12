@@ -1,0 +1,30 @@
+* Arvore de elementos
+
+*React Context é uma ferramenta essencial para todo desenvolvedor React conhecer.
+ Ele permite compartilhar facilmente o estado em suas aplicações
+
+* React Context nos permite passar e usar (consumir) dados em qualquer componente que precisamos em nossa aplicação do React sem usar propriedades.
+Em outras palavras, o React Context nos permite compartilhar dados (estados) entre nossos componentes de modo mais fácil.
+
+* Quando devo usar o React Context?
+O React Context é muito bom quando você está transmitindo dados que podem ser usados ​​em qualquer componente da aplicação.
+
+* Os dados que devem ser colocados no React Context são aqueles que não precisam ser atualizados com frequência.
+
+* Quais problemas o React Context resolve?
+O React Context nos ajuda a evitar o problema de propagação de propriedades (props drilling).
+A propagação de propriedades (props drilling) é um termo usado para descrever quando você passa propriedades por vários níveis para um componente aninhado,
+através de componentes que não precisam delas.
+
+
+-----------------------------------------------------------------------------------------------------
+
+1 passo - Criar um contexto 
+
+2 passo -  englobar nosso contexto na aplicação passando um provider
+
+3 passo - passar no provider uma propiedade value={{}} que são as informações que vou querer que o meu contexto tenha acesso
+
+4 passo - importar o useContext / importar o contexto criado, ambos no componente ou page que queira ser usado
+
+5 - passo - fazer a destruturação dos valores que voce quer dentro do contexto para cada page / componente

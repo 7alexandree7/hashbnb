@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, Navigate } from "react-router-dom";
 import '../../base/BASE_URL.JS';
+import { CustomHookUserContext } from '../../hooks/CustomHookUserContext';
 
-const Register = ({setUser}) => {
+const Register = () => {
 
+    const { setUser } = CustomHookUserContext()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -12,17 +14,17 @@ const Register = ({setUser}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if(name && email && password) {
-            try{
-                const {data: userDoc} = await axios.post("/users", {
+        if (name && email && password) {
+            try {
+                const { data: userDoc } = await axios.post("/users", {
                     name,
                     email,
                     password
                 })
                 setUser(userDoc)
-                setRedirect(true)       
+                setRedirect(true)
             }
-            catch(error) {
+            catch (error) {
                 console.log(error)
             }
         }
@@ -43,9 +45,9 @@ const Register = ({setUser}) => {
                             required
                             className='border border-gray-300 rounded-full px-4 py-2'
                             placeholder='your name'
-                            value={name}                       
+                            value={name}
                             onChange={(e) => setName(e.target.value)}
-                        /> 
+                        />
 
                         <input
                             type="email"

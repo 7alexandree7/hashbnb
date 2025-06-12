@@ -111,4 +111,9 @@ router.post("/login", async (req, res) => {
 })
 
 
+router.post("/logout", (req, res) => {
+    res.clearCookie("token").status(200).json({message: "Logged out successfully"})
+})
+
+
 export default router;
