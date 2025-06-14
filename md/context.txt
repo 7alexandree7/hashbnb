@@ -23,8 +23,10 @@ através de componentes que não precisam delas.
 
 2 passo -  englobar nosso contexto na aplicação passando um provider
 
-3 passo - passar no provider uma propiedade value={{}} que são as informações que vou querer que o meu contexto tenha acesso
+3 passo -  (Criar componente Provider)passar no provider uma propiedade value={{}} que são as informações que vou querer que o meu contexto tenha acesso
 
 4 passo - importar o useContext / importar o contexto criado, ambos no componente ou page que queira ser usado
 
 5 - passo - fazer a destruturação dos valores que voce quer dentro do contexto para cada page / componente
+
+6 - Fazer um custom hook para chamar o context, deixando mais profissional
