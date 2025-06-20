@@ -105,9 +105,13 @@ router.post("/login", async (req, res) => {
         id: userDoc._id,
     }
 
-    const token = jwt.sign(newUserObj, JWT_SECRET_KEY, {}, () => { })
-
-    res.cookie("token", token).status(200).json(newUserObj)
+    const token = jwt.sign(newUserObj, JWT_SECRET_KEY, {}, (error, token) => {
+        if (error) {
+            res.status(500).json({ message: "Error signing token" })
+            return
+        }
+        res.cookie("token", token).status(200).json(newUserObj)
+    })
 })
 
 
