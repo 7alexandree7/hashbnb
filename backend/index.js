@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import UserRoutes from "./router/users/routes.js";
+import PlaceRoutes from "./router/Places/routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -14,6 +15,7 @@ app.use(cors({
 app.use(cookieParser())
 
 app.use('/users', UserRoutes)
+app.use('/places', PlaceRoutes)
 
 const PORT = process.env.PORT || 4000
 

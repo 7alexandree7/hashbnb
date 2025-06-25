@@ -1,5 +1,7 @@
 import express from 'express';
 import { connectDB } from "../../config/db.js";
+import { jwtVerify } from '../../utils/jwtVerify.js';
+import { jwtSign } from '../../utils/jwtSign.js';
 import User from "../../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -22,23 +24,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/profile", async (req, res) => {
-
-    const { token } = req.cookies
-
-    if (token) {
-
-        jwt.verify(token, JWT_SECRET_KEY, {}, (error, userInfo) => {
-            if (error) {
-                throw error
-            }
-            res.json(userInfo)
-        })
-    }
-
-    else {
-        res.status(401).json({ message: "Unauthorized" })
-    }
-
+    const userInfo = await jwtVerify(req)
+    res.json(userInfo)
 });
 
 
@@ -61,14 +48,10 @@ router.post("/", async (req, res) => {
             password: passwordHash,
         })
 
-        const newUserObj = { name, email, id: newUserDoc._id }
+        const newUserObj = { name, email, _id: newUserDoc._id }
 
-        jwt.sign(newUserObj, JWT_SECRET_KEY, {}, (error, token) => {
-            if (error) {
-                throw error
-            }
-            res.cookie("token", token).status(200).json(newUserObj)
-        })
+        const token = await jwtSign(newUserObj)
+        res.cookie("token", token).status(201).json(newUserObj)
         
 
     } catch (error) {
@@ -99,19 +82,17 @@ router.post("/login", async (req, res) => {
         return res.status(401).json({ message: "Invalid credentials" })
     }
 
+    const {name, _id} = userDoc
+
+
     const newUserObj = {
-        name: userDoc.name,
-        email: userDoc.email,
-        id: userDoc._id,
+        name,
+        email,
+        _id,
     }
 
-    const token = jwt.sign(newUserObj, JWT_SECRET_KEY, {}, (error, token) => {
-        if (error) {
-            res.status(500).json({ message: "Error signing token" })
-            return
-        }
-        res.cookie("token", token).status(200).json(newUserObj)
-    })
+    const token = await jwtSign(newUserObj)
+    res.cookie("token", token).status(200).json(newUserObj)
 })
 
 
