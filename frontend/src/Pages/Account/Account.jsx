@@ -1,10 +1,15 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import AccountProfile from "../../Components/AccountProfile/AccountProfile";
 import AccountPlaces from "../../Components/AccountPlaces/AccountPlaces";
+import { CustomHookUserContext } from "../../hooks/CustomHookUserContext";
 
 const Account = () => {
 
   let params = useParams();
+
+  const {user} = CustomHookUserContext()
+
+  if (!user) return <Navigate to='/login'/>
 
   return (
     <section className='p-8'>

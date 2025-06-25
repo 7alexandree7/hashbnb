@@ -1,27 +1,58 @@
 import { useState } from 'react'
 import Perks from '../Perks/Perks'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom'
+import { CustomHookUserContext } from "../../hooks/CustomHookUserContext";
 
 const NewPlace = () => {
 
+  const {user} = CustomHookUserContext()
   const [title, setTitle] = useState("")
   const [city, setCity] = useState("")
-  const [photos, setPhotos] = useState("")
+  const [photos, setPhotos] = useState([])
   const [description, setDescription] = useState("")
   const [extras, setExtras] = useState("")
   const [price, setPrice] = useState("")
   const [checkin, setCheckin] = useState("")
   const [checkout, setCheckout] = useState("")
   const [guests, setGuests] = useState("")
+  const [perks, setPerks] = useState([])
+  const [redirect, setRedirect] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newPlace = await axios.post('/places', {
 
-    })
+    if(title && city && photos.length > 0 && photos.length > 0 && description && extras && price && checkin && checkout && guests) {
+      try {
+        const newPlace = await axios.post('/places', {
+          owner: user._id,
+          title,
+          city,
+          photos,
+          description,
+          extras,
+          perks,
+          price,
+          checkin,
+          checkout,
+          guests
+        })
+        setRedirect(true)
+        console.log(newPlace);
 
-    console.log(newPlace);
+      } catch (error) {
+        console.log(JSON.stringify(error))
+        alert("Erro ao criar o anúncio, tente novamente mais tarde.")
+      }
+    }
+    else {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    }
   }
+
+
+  if (redirect) return <Navigate to={'/account/places'} />
 
   return (
 
@@ -100,7 +131,7 @@ const NewPlace = () => {
 
       <div className='flex flex-col gap-2'>
         <h2 className='text-2xl font-bold ml-2'>Comodidades</h2>
-        <Perks />
+        <Perks  perks={perks} setPerks={setPerks}/>
       </div>
 
       <div className='flex flex-col gap-2'>
