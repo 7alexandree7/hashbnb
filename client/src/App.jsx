@@ -1,3 +1,4 @@
+import Header from "./Components/Layout/Header/Header"
 
 
 
@@ -6,7 +7,7 @@ function App() {
 
   return (
     <>
-      <h1>Hello, World!</h1>
+      <Header />
     </>
   )
 }
