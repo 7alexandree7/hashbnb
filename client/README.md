@@ -13,6 +13,7 @@
 
  Front-End
   -HeroIcons
+  - react router dom
 
  Back-End
   -
@@ -26,6 +27,7 @@
 
 - Por padrão ao instalar e importar em nossa aplicação ele ja reseta todo o estilo padrãp do html
 - Classes utilitárias
+- Propiedade truncate
 
 
 ------------------------------------------------------------------------------------------------------------
