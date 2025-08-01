@@ -12,22 +12,21 @@
   - TailwindCSS
 
  Front-End
-  -HeroIcons
-  - react router dom
+  - HeroIcons
+  - React router dom
 
  Back-End
-  -
+  - Express
+  - Mongoose
+
+ Banco de dados
+  - MongoDB
 
 
 ------------------------------------------------------------------------------------------------------------
 
 
+*** ROADMAP ***
 
-* TailwindCSS
-
-- Por padrão ao instalar e importar em nossa aplicação ele ja reseta todo o estilo padrãp do html
-- Classes utilitárias
-- Propiedade truncate
-
-
-------------------------------------------------------------------------------------------------------------
+1 - Conectar o banco de dados na nossa aplicação
+2 - Criar o modelo de user
