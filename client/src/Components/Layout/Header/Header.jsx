@@ -28,7 +28,7 @@ const Header = () => {
                         <SvgMenu />
                         <SvgUser />
                     </div>
-                    <p className='font-semibold text-gray-800 max-w-20 truncate'>Unfast ayo</p>
+                    <p className='font-semibold text-gray-700 max-w-20 md:max-w-24  lg:max-w-26  truncate'>Unfast ayo</p>
                 </Link>
 
             </div>
