@@ -1,5 +1,5 @@
 import User from '../../models/user/User.js';
-import { connectDB } from '../../config/db.js';
+import { connectDB } from '../../config/db/db.js';
 import { Router } from "express";
 import bcrypt from 'bcryptjs';
 
