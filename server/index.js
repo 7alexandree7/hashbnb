@@ -1,15 +1,14 @@
 import express from 'express';
 import 'dotenv/config';
-import {connectDB} from './config/db.js';
+import UserRoutes from './routes/users/routes.js'
 
-
-const app = express()
 const { PORT } = process.env
 
+const app = express()
+app.use(express.json());
+app.use('/users', UserRoutes);
 
-app.get(('/', (req, res) => {
-    res.send('Hello World!')
-}))
+
 
 app.listen((PORT), () => {
     console.log(`Server is running on port ${PORT}`)
