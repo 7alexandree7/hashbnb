@@ -34,4 +34,27 @@ router.post('/', async (req, res) => {
 })
 
 
+router.post('/login', async (req, res) => {
+    await connectDB()
+
+    const { email, password } = req.body
+
+    try {
+        const userDoc = await User.findOne({ email })
+        if (!userDoc) {
+            return res.status(404).json({ message: 'Usuário não encontrado' });
+        }
+        const passwordCorrect = bcrypt.compareSync(password, userDoc.password)
+        const { name, _id } = userDoc
+        passwordCorrect ? 
+            res.json({ name, email, _id }) : 
+            res.status(400).json({ message: 'Senha incorreta' });
+    }
+    catch (error) {
+        console.error('Error during login:', error);
+        return res.status(500).json({ message: 'erro ao logar' });
+    }
+})
+
+
 export default router;

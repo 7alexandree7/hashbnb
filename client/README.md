@@ -14,12 +14,14 @@
  Front-End
   - HeroIcons
   - React router dom
+  - Axios
 
  Back-End
   - Express
   - Mongoose
   - Dotenv
   - Bcryptjs
+  - cors
 
  Banco de dados
   - MongoDB
@@ -35,3 +37,5 @@
 3 - Criar rota de listagem de usuarios
 4 - Criar a rota post para criar um novo usuario - requer um (middleware json) para funcionar
 5 - Criar a pasta de rotas de users / organizar o código
+6 - Criar a rota de login
+7 - Mandar uma requisição do tipo post do frontend, enviando meus dados para a api

@@ -4,7 +4,7 @@ import SvgSearch from '../../Svg/SvgSearch/SvgSearch'
 import SvgUser from '../../Svg/SvgUser/SvgUser'
 import SvgMenu from '../../Svg/SvgMenu/SvgMenu'
 
-const Header = () => {
+const Header = ({ user }) => {
     return (
         <header className='shadow-md'>
             <div className='max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-8 py-4'>
@@ -23,12 +23,16 @@ const Header = () => {
                     </div>
                 </Link>
 
-                <Link to='/login' className='flex items-center gap-4 border border-gray-300 px-6 py-2 shadow-md rounded-full cursor-pointer'>
+                <Link to={user ? '/account' : '/login'} className='flex items-center gap-4 border border-gray-300 px-6 py-2 shadow-md rounded-full cursor-pointer'>
                     <div className='flex items-center gap-1'>
                         <SvgMenu />
                         <SvgUser />
                     </div>
-                    <p className='font-semibold text-gray-700 max-w-20 md:max-w-24  lg:max-w-26  truncate'>Unfast ayo</p>
+                    {user ? (
+                        <p className='font-semibold text-gray-700 max-w-20 md:max-w-24  lg:max-w-26  truncate'>{user.name}</p>
+                    ) : (
+                        <p className='font-semibold text-gray-700 max-w-20 md:max-w-24  lg:max-w-26  truncate'>Login</p>
+                    )}
                 </Link>
 
             </div>

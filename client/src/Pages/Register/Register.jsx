@@ -1,34 +1,21 @@
-import  { useState } from 'react'
+import React, { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
-import axios from 'axios'
+//import axios from 'axios'
 
-const Login = ({ user, setUser }) => {
+const Register = () => {
 
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
+    //const [redirect, setRedirect] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            if (email && password) {
-                const { data: userDoc } = await axios.post('/users/login', {
-                    email,
-                    password
-                })
-                setUser(userDoc);
-                setRedirect(true);
-            }
-        } 
-        catch (error) {
-            alert('Erro ao fazer login, verifique suas credenciais e tente novamente.');
-            console.error('Login error:', error);
-        }
     }
 
-    if (redirect || user) {
-        return <Navigate to={'/'} />
-    }
+   // if (redirect) {
+      //  return <Navigate to={'/'} />
+    //}
 
     return (
         <section className="flex items-center">
@@ -36,6 +23,13 @@ const Login = ({ user, setUser }) => {
                 <h1 className='text-3xl font-bold'>Faça seu login</h1>
 
                 <form onSubmit={handleSubmit} className='w-full flex flex-col gap-4'>
+                    <input
+                        className='w-full outline-none rounded-full px-4 py-2 border border-gray-300'
+                        placeholder='your name'
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required />
                     <input
                         className='w-full outline-none rounded-full px-4 py-2 border border-gray-300'
                         placeholder='example@gmail.com'
@@ -52,14 +46,14 @@ const Login = ({ user, setUser }) => {
                         required />
                     <button
                         className='bg-primary-400 text-white rounded-full px-4 py-2 cursor-pointer'>
-                        Login
+                        Registrar
                     </button>
                 </form>
 
-                <p>Ainda não possui uma conta? <Link className='underline font-semibold' to='/register'>Registre-se aqui!</Link></p>
+                <p>Ja possui uma conta? <Link className='underline font-semibold' to='/login'>Login</Link></p>
             </div>
         </section>
     )
 }
 
-export default Login
+export default Register
