@@ -1,21 +1,35 @@
 import React, { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
-//import axios from 'axios'
+import axios from 'axios'
 
-const Register = () => {
+const Register = ({ setUser }) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    //const [redirect, setRedirect] = useState(false);
+    const [redirect, setRedirect] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (name && email && password) {
+            try {
+                const { data } = await axios.post('/users/register', { name, email, password });
+                setRedirect(true);
+                setUser(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        else {
+            alert('Preencha todos os campos');
+        }
     }
 
-   // if (redirect) {
-      //  return <Navigate to={'/'} />
-    //}
+    if (redirect) {
+        return <Navigate to={'/'} />
+    }
 
     return (
         <section className="flex items-center">

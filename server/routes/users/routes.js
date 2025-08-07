@@ -2,19 +2,37 @@ import User from '../../models/user/User.js';
 import { connectDB } from '../../config/db/db.js';
 import { Router } from "express";
 import bcrypt from 'bcryptjs';
-
+import jwt from 'jsonwebtoken';
+import "dotenv/config";
 
 const router = Router()
 const bcryptSalt = bcrypt.genSaltSync();
+const { JWT_SECRET_KEY } = process.env;
 
 router.get('/', async (req, res) => {
     await connectDB()
     const userDoc = await User.find()
     res.json(userDoc)
+})
+
+router.get('/profile', async (req, res) => {
+    const { token } = req.cookies;
+    
+    if (token) {
+        try {
+            const userInfo = jwt.verify(token, JWT_SECRET_KEY); 
+            res.json(userInfo);
+        } catch (error) {
+            res.status(401).json({ message: 'Token inválido ou expirado' });
+        }
+    }
+    else {
+        res.status(401).json({ message: 'Usuário não autenticado' });
+    }
 });
 
 
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     await connectDB()
 
     const { name, email, password } = req.body;
@@ -27,7 +45,11 @@ router.post('/', async (req, res) => {
             email,
             password: encryptedPassord
         })
-        res.json(newUserDoc);
+
+        const { _id } = newUserDoc;
+        const newUserObj = { name, email, _id };
+        const token = jwt.sign(newUserObj, JWT_SECRET_KEY);
+        res.cookie('token', token).json(newUserObj);
     } catch (error) {
         res.status(400).json({ message: 'Error creating user', error: error.message });
     }
@@ -41,14 +63,22 @@ router.post('/login', async (req, res) => {
 
     try {
         const userDoc = await User.findOne({ email })
+
         if (!userDoc) {
             return res.status(404).json({ message: 'Usuário não encontrado' });
         }
+
         const passwordCorrect = bcrypt.compareSync(password, userDoc.password)
         const { name, _id } = userDoc
-        passwordCorrect ? 
-            res.json({ name, email, _id }) : 
+
+        if (passwordCorrect) {
+            const newUserObj = { name, email, _id }
+            const token = jwt.sign(newUserObj, JWT_SECRET_KEY)
+            res.cookie('token', token).json(newUserObj)
+        }
+        else {
             res.status(400).json({ message: 'Senha incorreta' });
+        }       
     }
     catch (error) {
         console.error('Error during login:', error);
