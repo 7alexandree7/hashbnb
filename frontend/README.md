@@ -6,6 +6,7 @@
 
  - Bibiotecas Front end
    - Axios
+   - react-router-dom
 
  - Ícones
   - Heroicons
@@ -22,6 +23,7 @@
    - Dotenv
    - Mongoose
    - Bcryptjs
+   - Cors
 
 -----------------------------------------------------------------------------
 
@@ -39,6 +41,9 @@
  - Rota de get - Listar todos os usarios com o find()
  - Rota de post - Para criar usários 
 
+ - find() - Encontrar todos os usuarios
+ - findOne() - Encontrar o primeiro usuário passado por um parametro
+
  -----------------------------------------------------------------------------
 
 
@@ -50,12 +55,3 @@
 
 
  -----------------------------------------------------------------------------
-
-
- * - Header - Front ✅
- * - Tela de Login Front ✅
- * - Roteamento com react router dom ✅
- * - Listar Usuários ✅
- * - Criar Usúarios ✅
- * - Conexão com banco de dados ✅
-* - Organizando a arquitetura de pastas da aplicação ✅

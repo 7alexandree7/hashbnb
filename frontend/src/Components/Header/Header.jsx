@@ -4,7 +4,7 @@ import SearchIcon from '../../Icons/SearchIcon/SearchIcon'
 import UserIcon from '../../Icons/UserIcon/UserIcon'
 import MenuIcon from '../../Icons/MenuIcon/MenuIcon'
 
-const Header = () => {
+const Header = ({ user}) => {
   return (
     <div className='shadow-md'>
       <div className='flex items-center justify-between px-4 py-4 sm:px-8 max-w-7xl mx-auto'>
@@ -23,12 +23,12 @@ const Header = () => {
           </div>
         </Link>
 
-        <Link to={'/login'} className='flex items-center border border-gray-300 rounded-full shadow-md px-4 py-2'>
+        <Link to={user ? '/account' : '/login'} className='flex items-center border border-gray-300 rounded-full shadow-md px-4 py-2'>
           <div className='flex items-center gap-1.5'>
             <MenuIcon />
             <UserIcon />
           </div>
-          <p className='max-w-32 truncate lg:max-w-20 '>uk unfast</p>
+          {user && <p className='mx-2 max-w-32 truncate lg:max-w-20 '>{user.name} </p>}
         </Link>
 
       </div>
