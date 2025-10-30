@@ -5,13 +5,24 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from "./Pages/Login/Login"
 import { useState } from "react"
 import Register from "./Pages/Register/Register"
+import { useEffect } from "react"
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
+axios.defaults.withCredentials = true
 
 
 function App() {
 
   const [user, setUser] = useState(null)
+
+  const axiosGetUser = async () => {
+    const { data } = await axios.get('/v1/users/profile')
+    setUser(data)
+  }
+
+  useEffect(() => {
+    axiosGetUser()
+  }, [])
 
   return (
     <>

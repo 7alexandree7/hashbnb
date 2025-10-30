@@ -2,9 +2,12 @@ import { Router } from 'express'
 import bcrypt from 'bcryptjs'
 import User from '../../model/User/User.js'
 import { connectDB } from '../../config/db.js'
+import jwt from 'jsonwebtoken'
+import 'dotenv/config'
 
 const salt = bcrypt.genSaltSync(10)
 const router = Router()
+const { JWT_SECRET } = process.env
 
 router.get('/', async (req, res) => {
 
@@ -18,8 +21,24 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/profile', async (req, res) => {
 
-router.post('/', async (req, res) => {
+    const { token } = req.cookies
+
+    if (!token) {
+        return res.status(401).json({ error: 'Usuário não autenticado.' })
+    }
+
+    try {
+        const userInfo = jwt.verify(token, JWT_SECRET)
+        res.status(200).json(userInfo)
+    } catch (error) {
+        res.status(401).json({ error: 'Token inválido.' })
+    }
+})
+
+
+router.post('/register', async (req, res) => {
     try {
         await connectDB()
 
@@ -30,7 +49,6 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ error: 'Por favor, preencha todos os campos obrigatórios.' })
         }
 
-
         const newUser = await User.create(
             {
                 name,
@@ -39,7 +57,9 @@ router.post('/', async (req, res) => {
             }
         )
 
-        return res.status(201).json(newUser)
+        const newUserObj = {name, email, _id: newUser._id}
+        const token = jwt.sign(newUserObj, JWT_SECRET, { expiresIn: '7d' })
+        return res.cookie('token', token).status(201).json(newUser)
 
     } catch (error) {
         return res.status(500).json({ error: 'Erro ao criar usuário.' })
@@ -58,8 +78,10 @@ router.post('/login', async (req, res) => {
         }
 
         const user = await User.findOne({ email })
-        const { _id } = user
-        const userDoc = { email, _id, name: user.name}
+        const { name , _id } = user
+        const newUserObj = { name, email, _id }
+        const token = jwt.sign(newUserObj, JWT_SECRET, {expiresIn: '7d'})
+
         const passwordCorrect = bcrypt.compareSync(password, user.password)
 
         if(!passwordCorrect) {
@@ -70,7 +92,7 @@ router.post('/login', async (req, res) => {
             return res.status(404).json({ error: 'Usuário não encontrado.' })
         }
 
-        return res.status(200).json(userDoc)
+        return res.cookie('token', token).status(200).json(newUserObj)
 
     } catch (error) {
         res.status(500).json({ error: 'Erro ao fazer login.' })

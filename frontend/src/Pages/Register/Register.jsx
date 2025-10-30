@@ -12,11 +12,12 @@ const Register = ({ setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (email && password) {
+        if (email && password && name) {
             try {
-                const { data: userDoc } = await axios.post(`/v1/users/login`, {
+                const { data: userDoc } = await axios.post(`/v1/users/register`, {
                     email,
-                    password
+                    password,
+                    name
                 })
                 setName('')
                 setEmail('')
@@ -25,7 +26,7 @@ const Register = ({ setUser }) => {
                 setRedirect(true)
             }
             catch (error) {
-                console.log('Erro ao fazer login', error)
+                console.log('Erro ao criar usuário', error)
             }
         }
     }
