@@ -3,40 +3,29 @@ import Header from "./Components/Header/Header"
 import Home from "./Pages/Home/Home"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from "./Pages/Login/Login"
-import { useState } from "react"
 import Register from "./Pages/Register/Register"
-import { useEffect } from "react"
+import Account from "./Pages/Account/Account"
+import { UseContextProvider } from "./Context/UseContextProvider/UseContextProvider"
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 axios.defaults.withCredentials = true
 
-
 function App() {
 
-  const [user, setUser] = useState(null)
-
-  const axiosGetUser = async () => {
-    const { data } = await axios.get('/v1/users/profile')
-    setUser(data)
-  }
-
-  useEffect(() => {
-    axiosGetUser()
-  }, [])
-
   return (
-    <>
+    <UseContextProvider>
 
       <BrowserRouter>
-        <Header user={user} />
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login user={user} setUser={setUser} />} />
-          <Route path="/register" element={<Register setUser={setUser} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/account/:subpage?" element={<Account />} />
         </Routes>
       </BrowserRouter>
 
-    </>
+    </UseContextProvider>
   )
 }
 

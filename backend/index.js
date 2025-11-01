@@ -1,8 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
-import routes from './routes/index.js'
+import routes from './routes/routes.js'
 import cookieParser from 'cookie-parser'
+import { connectDB } from './config/db.js'
 
 const app = express()
 app.use(express.json())
@@ -13,6 +14,13 @@ const { PORT } = process.env
 
 app.use("/v1", routes)
 
-app.listen(PORT, () => {
-    console.log(`Servidor esta rodando na porta ${PORT}`)
-})
+connectDB()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Servidor rodando na porta ${PORT}`)
+        });
+    })
+    .catch((error) => {
+        console.error('Erro ao conectar ao banco de dados:', error)
+        process.exit(1)
+    });

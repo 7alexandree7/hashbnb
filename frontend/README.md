@@ -78,4 +78,20 @@
      - Utilizar a lib cookie parser, para conseguir ler os cookies das requisições
      - utilizar o cokkie ja descriptado e inserir na variavel de estado, deixando os dados do usuario permanente
 
+     - clearCookies no back para limpar os cookies / limpar o user
+
   -----------------------------------------------------------------------------
+
+*** CONTEXT ***
+  - Criação da pagina Context
+  - Criar o context com o createContext(null) do react / vai armazenar o contexto do usuário
+  - exportar esse context para envolver toda nossa aplicação
+  - Criar dentro do context, um componente / provider onde todas nossas informações serão passadas para o resto da aplicação recebendo o children
+  - Depois precisamos usar o value={{}} para determinar quais informações nosso contexto vai poder passar para os componentes / pages
+  - Para usar o contexto que criamos, usamos o hook useContext() passando qual informação de dentro do contexto cada componente / page precisa
+  - Para não ter que em todos os componentes / pages importar o useContext e o contexto, dentro do contexto fazemos uma função que ela ja chama nosso contexto dentro do useContext
+  
+
+  -----------------------------------------------------------------------------
+
+
